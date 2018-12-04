@@ -25,7 +25,7 @@ class Electrum
 
         $this->client = new Client([
             'base_uri' => $host.':'.$port,
-            'auth'     => $this->getAuth(),
+            /* 'auth'     => $this->getAuth(),*/
 
         ]);
     }
