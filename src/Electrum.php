@@ -25,12 +25,22 @@ class Electrum
 
         $this->client = new Client([
             'base_uri' => $host.':'.$port,
-            ['auth' => [
-                config('electrum.user'),
-                config('electrum.password'),
-            ],
-            ],
+            'auth'     => $this->getAuth(),
+
         ]);
+    }
+
+    /**
+     * Gets authentication array.
+     *
+     * @return array
+     */
+    protected function getAuth()
+    {
+        return [
+            config('electrum.user', 'user'),
+            config('electrum.password', ''),
+        ];
     }
 
     /**
