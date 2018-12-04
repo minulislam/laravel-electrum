@@ -1,5 +1,5 @@
 {
-    "name": "araneadev/laravel-electrum",
+    "name": "minuli/laravel-electrum",
     "description": "A Laravel 5.4+ wrapper for Electrum",
     "license": "GPL3",
     "authors": [
@@ -11,12 +11,20 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.0.0",
-        "laravel/framework": "^5.4",
+        "illuminate/support": "5.4.*|5.5.*|5.6.*|5.7.*",
         "guzzlehttp/guzzle": "^6.3"
     },
     "autoload": {
         "psr-4": {
             "AraneaDev\\Electrum\\": "src"
+        }
+    },
+        "extra": {
+        "laravel": {
+            "providers": [
+                "AraneaDev\\Electrum\\ElectrumServiceProvider"
+            ]
+
         }
     }
 }

@@ -22,7 +22,7 @@ class ElectrumServiceProvider extends ServiceProvider
         // Bind the package routes
         include __DIR__.'/routes/electrum.php';
 
-        // Bind the console commands
+// Bind the console commands
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ElectrumCommand::class,

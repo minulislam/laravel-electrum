@@ -5,7 +5,7 @@ return [
     'port'          => '7777',
     'web_interface' => [
         'enabled'    => false,
-        'currency'   => 'EUR',
+        'currency'   => 'USD',
         'middleware' => ['web', 'auth'],
         'prefix'     => 'electrum',
     ],

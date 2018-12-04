@@ -10,7 +10,9 @@ use GuzzleHttp\Client;
  */
 class Electrum
 {
-    /** @var Client */
+    /**
+     * @var Client
+     */
     protected $client;
 
     /**
@@ -59,8 +61,7 @@ class Electrum
     /**
      * Get balance for address.
      *
-     * @param $address
-     *
+     * @param  $address
      * @return object
      */
     public function getAddressBalance($address)
@@ -71,8 +72,7 @@ class Electrum
     /**
      * Get history for address.
      *
-     * @param $address
-     *
+     * @param  $address
      * @return object
      */
     public function getAddressHistory($address)
@@ -83,8 +83,7 @@ class Electrum
     /**
      * Get unspent for address.
      *
-     * @param $address
-     *
+     * @param  $address
      * @return object
      */
     public function getAddressUnspent($address)
@@ -95,8 +94,7 @@ class Electrum
     /**
      * Check whether address is in wallet.
      *
-     * @param $address
-     *
+     * @param  $address
      * @return object
      */
     public function isAddressMine($address)
@@ -117,10 +115,9 @@ class Electrum
     /**
      * Create a new payment request.
      *
-     * @param float  $amount
-     * @param string $memo
-     * @param int    $expiration
-     *
+     * @param  float    $amount
+     * @param  string   $memo
+     * @param  int      $expiration
      * @return object
      */
     public function createRequest($amount = 0.00, $memo = '', $expiration = 3600)
@@ -145,8 +142,7 @@ class Electrum
     /**
      * Get a payment request by address.
      *
-     * @param $address
-     *
+     * @param  $address
      * @return object
      */
     public function getRequest($address)
@@ -157,8 +153,7 @@ class Electrum
     /**
      * Clear a payment request by address.
      *
-     * @param $address
-     *
+     * @param  $address
      * @return object
      */
     public function clearRequest($address)
@@ -179,8 +174,7 @@ class Electrum
     /**
      * Validate address.
      *
-     * @param $address
-     *
+     * @param  $address
      * @return object
      */
     public function validateAddress($address)
@@ -211,8 +205,7 @@ class Electrum
     /**
      * Get transaction details.
      *
-     * @param $txid
-     *
+     * @param  $txid
      * @return object
      */
     public function getTransaction($txid)
@@ -223,8 +216,7 @@ class Electrum
     /**
      * Sign a address.
      *
-     * @param $address
-     *
+     * @param  $address
      * @return object
      */
     public function signRequest($address)
@@ -235,8 +227,7 @@ class Electrum
     /**
      * Broadcast a transaction.
      *
-     * @param $tx
-     *
+     * @param  $tx
      * @return object
      */
     public function broadcast($tx)
@@ -247,8 +238,7 @@ class Electrum
     /**
      * Serialize JSON tx.
      *
-     * @param $json
-     *
+     * @param  $json
      * @return object
      */
     public function serialize($json)
@@ -259,8 +249,7 @@ class Electrum
     /**
      * Deserialize JSON tx.
      *
-     * @param $tx
-     *
+     * @param  $tx
      * @return object
      */
     public function deserialize($tx)
@@ -271,25 +260,23 @@ class Electrum
     /**
      * Encrypt a message.
      *
-     * @param $public_key
-     * @param $message
-     *
+     * @param  $public_key
+     * @param  $message
      * @return object
      */
     public function encrypt($public_key, $message)
     {
         return $this->sendRequest('encrypt', [
-            'pubkey'    => $public_key,
-            'message'   => $message,
+            'pubkey'  => $public_key,
+            'message' => $message,
         ]);
     }
 
     /**
      * Decrypt a message.
      *
-     * @param $public_key
-     * @param $encrypted
-     *
+     * @param  $public_key
+     * @param  $encrypted
      * @return object
      */
     public function decrypt($public_key, $encrypted)
@@ -303,8 +290,7 @@ class Electrum
     /**
      * Check a seed.
      *
-     * @param $seed
-     *
+     * @param  $seed
      * @return object
      */
     public function checkSeed($seed)
@@ -335,8 +321,7 @@ class Electrum
     /**
      * Freeze an address.
      *
-     * @param $address
-     *
+     * @param  $address
      * @return object
      */
     public function freeze($address)
@@ -347,8 +332,7 @@ class Electrum
     /**
      * Get Electrum config value.
      *
-     * @param $key
-     *
+     * @param  $key
      * @return object
      */
     public function getConfig($key)
@@ -359,9 +343,8 @@ class Electrum
     /**
      * Set Electrum config value.
      *
-     * @param $key
-     * @param $value
-     *
+     * @param  $key
+     * @param  $value
      * @return object
      */
     public function setConfig($key, $value)
@@ -375,138 +358,129 @@ class Electrum
     /**
      * Create a new payment.
      *
-     * @param string $destination
-     * @param float  $amount
-     * @param string password
-     *
+     * @param  string   $destination
+     * @param  float    $amount
+     * @param  string   password
      * @return object
      */
     public function createPayment($destination = '', $amount = 0.00, $password = '')
     {
         return $this->sendRequest('payto', [
-            'destination'=> $destination,
-            'amount'     => $amount,
-	    'password'   => $password,
+            'destination' => $destination,
+            'amount'      => $amount,
+            'password'    => $password,
         ]);
     }
 
     /**
      * Sign a transaction.
      *
-     * @param string $tx
-     * @param string $password
-     *
+     * @param  string   $tx
+     * @param  string   $password
      * @return object
      */
     public function sign($tx = '', $password = '')
     {
         return $this->sendRequest('signtransaction', [
             'tx'       => $tx,
-	    'password' => $password
+            'password' => $password,
         ]);
     }
 
     /**
      * Get the maximumm amount that can be sent.
      *
-     * @param string $destination
-     * @param string $password
-     *
+     * @param  string   $destination
+     * @param  string   $password
      * @return object
      */
     public function getmax($destination = '', $password = '')
     {
         return $this->sendRequest('getmax', [
             'destination' => $destination,
-	    'password'    => $password
+            'password'    => $password,
         ]);
     }
 
     /**
      * Create a wallet.
      *
-     * @param string $seed
-     * @param string $password
-     *
+     * @param  string   $seed
+     * @param  string   $password
      * @return object
      */
     public function createWallet($seed = '', $password = '')
     {
-        if ($seed == '') {
+        if ('' == $seed) {
             return $this->sendRequest('create_new', [
-	        'password' => $password
+                'password' => $password,
             ]);
-	} else {
+        } else {
             return $this->sendRequest('create_from_seed', [
-	        'seed' => $seed,
-	        'password' => $password
+                'seed'     => $seed,
+                'password' => $password,
             ]);
-	}
+        }
     }
 
     /**
      * Load a wallet.
      *
-     * @param string $password
-     *
+     * @param  string   $password
      * @return object
      */
     public function loadWallet($password = '')
     {
-	$config = [
-	    'subcommand' => 'load_wallet',
-	    'testnet' => 'True',
-	    'password' => $password
-	];
+        $config = [
+            'subcommand' => 'load_wallet',
+            'testnet'    => 'True',
+            'password'   => $password,
+        ];
         return $this->sendRequest('daemon', [
-	    'config_options' => $config
+            'config_options' => $config,
         ]);
     }
 
     /**
      * Create a seed and a key for a multisig wallet
      *
-     * @param string $seed
-     *
+     * @param  string   $seed
      * @return object
      */
     public function createMultisigKey($seed = '')
     {
-        if ($seed == '') {
+        if ('' == $seed) {
             return $this->sendRequest('create_new_multisig_key', []);
-	} else {
+        } else {
             return $this->sendRequest('create_multisig_key', [
-	        'seed' => $seed
+                'seed' => $seed,
             ]);
-	}
+        }
     }
 
     /**
      * Create a multisig wallet
      *
-     * @param string $seed
-     * @param string $cosignerkey
-     * @param string $password
-     *
+     * @param  string   $seed
+     * @param  string   $cosignerkey
+     * @param  string   $password
      * @return object
      */
     public function createMultisigWallet($seed = '', $cosignerkey = '', $password = '')
     {
         return $this->sendRequest('create_multisig_wallet', [
-	    'seed' => $seed,
-	    'cosignerkey' => $cosignerkey,
-	    'password' => $password
+            'seed'        => $seed,
+            'cosignerkey' => $cosignerkey,
+            'password'    => $password,
         ]);
     }
 
     /**
      * Send a request to the Electrum JSON RPC API.
      *
-     * @param $method
-     * @param array $params
-     *
+     * @param  $method
+     * @param  array       $params
      * @throws Exception
-     *
      * @return object
      */
     public function sendRequest($method, $params = [])
